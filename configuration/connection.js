@@ -1,7 +1,7 @@
 // mongodb connect
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://0.0.0.0:27017/KeysDB');
+mongoose.connect('mongodb+srv://Keys:DINw0vk8sJAWVQn4@cluster0.nr6imyi.mongodb.net/Cluster0');
 // mongoose.connect('mongodb+srv://keys.bcwtduy.mongodb.net/myFirstDatabase" --apiVersion 1 --username Farisrs');
 // mongoose.connect('mongodb+srv://Farisrs:qwerty12345@keys.bcwtduy.mongodb.net/Keys')
             
