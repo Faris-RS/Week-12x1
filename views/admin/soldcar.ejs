@@ -1,0 +1,88 @@
+<%- include('../admin/layout/admin-header-layout.ejs') -%>
+
+  <div class="col-lg">
+    <div class="card">
+      <div class="card-body ">
+        <div style="display: flex; justify-content: space-between;">
+          <h5 class="card-title">Sold Cars</h5>
+
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Brand</th>
+                <th scope="col">FUEL TYPE</th>
+                <th scope="col">Car Name</th>
+                <th scope="col">Details</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">OPTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% products.forEach(function(product){ %>
+                <tr>
+                  <th scope="row">
+                    <%= index++ %>
+                  </th>
+                  <td>
+                    <%= product.type.typeName %>
+                  </td>
+                  <td>
+                    <%= product.brand.brand %>
+                  </td>
+                  <td>
+                    <%= product.fuelType.fuelType %>
+                  </td>
+                  <td>
+                    <%= product.productName %>
+                  </td>
+                  <td>
+                    <%= product.discription %>
+                  </td>
+                  <td>
+                    <%= product.price %>
+                  </td>
+                  <td><img src='/images/car/<%= product.image[0] %>' alt="" style="height: 50px; width: 60px;"></td>
+                  <td>
+
+                    <!-- Sold or not Sold -->
+                    <% if (product.sold=='Sold' ) { %>
+                      <form action="/admin/notsoldCar/<%= product._id %> " method="post">
+                        <button type="submit" class="btn btn-success" style="width: 100px;">Not Sold</button>
+                      </form>
+                      <% } %>
+
+                  </td>
+                </tr>
+                <% }) %>
+                  <section class="d-flex justify-content-center mt-2">
+                    <% if(hasPreviousPage){ %>
+                      <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black" class="text-center"
+                        href="/admin/soldcarpage?page=<%= PreviousPage %>"><i class="fa fa-chevron-left"
+                          aria-hidden="true"></i></a>
+                      <% } %>
+                        <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black; border: 1px solid black;"
+                          href="/admin/soldcarpage?page=<%= page %>">
+                          <%= page %>
+                        </a>
+                        <% if(hasNextPage) { %>
+                          <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black;"
+                            href="/admin/soldcarpage?page=<%=  page+1 %>"><i class="fa fa-chevron-right"
+                              aria-hidden="true"></i></a>
+                          <% } %>
+
+                  </section>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../admin/layout/admin-footer-layout.ejs') -%>

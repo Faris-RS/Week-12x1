@@ -1,0 +1,80 @@
+<%- include('../admin/layout/admin-header-layout.ejs') -%>
+
+<div class="col-lg">
+  <div class="card">
+    <div class="card-body">
+      <div style="display: flex; justify-content: space-between">
+        <h5 class="card-title">Orders</h5>
+      </div>
+      <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div> -->
+<br>
+      <% if (orders.length == 0) { %> 
+        <div class="col-12 text-center">
+          <img src="https://ibellstore.com/images/no-item-found-here.png" alt="no order" style="width: 400px; height:300px ;">
+        </div>
+      <% } else { %> 
+          
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User Name</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Car Name</th>
+              <th scope="col">FUEL TYPE</th>
+              <th scope="col">Blocked Date</th>
+              <th scope="col">Price</th>
+              <th scope="col">Advance</th>
+              <th scope="col">Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(function(x){ %>
+              <%console.log(x)%>
+            <tr>
+              <th scope="row"><%= index++ %></th>
+              <td><%= x.userId?.userName %></td>
+              <td><%= x.userId?.fullName %></td>
+              <td><%= x.product?.brand.brand %></td>
+              <td><%= x.product?.productName %></td>
+              <td><%= x.product?.fuelType.fuelType %></td>
+              <td><%= x.date %></td>
+              <td><%= x.product?.price %></td>
+              <td><%= x.product?.advance %></td>
+              <td>
+                <img
+                  src="/images/car/<%= x?.product?.image[0] %>"
+                  alt=""
+                  style="height: 50px; width: 60px"
+                />
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <section class="d-flex justify-content-center mt-2">
+        <% if(hasPreviousPage){ %>
+          <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white" class="text-center"
+            href="/admin/orders?page=<%= PreviousPage %>"><i class="fa fa-chevron-left"
+              aria-hidden="true"></i>&nbsp; Previous</a>
+          <% } %>
+            <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white; border: 2px solid white; border-radius: 50px;"
+              href="/admin/orders?page=<%= page %>">
+              <%= page %>
+            </a>
+            <% if(hasNextPage) { %>
+              <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white;"
+                href="/admin/orders?page=<%=  page+1 %>">Next &nbsp; <i class="fa fa-chevron-right"
+                  aria-hidden="true"></i></a>
+              <% } %>
+      </section>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../admin/layout/admin-footer-layout.ejs') -%>

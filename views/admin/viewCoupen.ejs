@@ -1,0 +1,67 @@
+<%- include('../admin/layout/admin-header-layout.ejs') -%>
+
+  <div class="col-lg">
+    <div class="card">
+      <div class="card-body ">
+        <div style="display: flex; justify-content: space-between;">
+          <h5 class="card-title">Coupen</h5>
+          <div>
+            <form action="/admin/addCoupenPage" method="get">
+              <button class="btn btn-success me-md-2" type="submit">Add Coupen</button>
+            </form>
+          </div>
+
+        </div>
+        <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div> -->
+
+        <% if (coupens.length == 0) { %> 
+          <div class="col-12 text-center">
+            <img src="https://ibellstore.com/images/no-item-found-here.png" alt="no order" style="width: 400px; height:300px ;">
+          </div>
+        <% } else { %> 
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Coupen Name</th>
+                <th scope="col">Discount Percentage</th>
+                <th scope="col">Maximum Discount Amount</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% coupens.forEach(function(coupen){ %>
+                <tr>
+                  <th scope="row">
+                    <%= index++ %>
+                  </th>
+                  <td>
+                    <%= coupen.coupenName %>
+                  </td>
+                  <td>
+                    <%= coupen.discount %>
+                  </td>
+                  <td>
+                    <%= coupen.maximum %>
+                </td>
+                    <td>  
+                    <form action="/admin/deleteCoupen/<%= coupen._id %>" method="post">
+                      <button type="submit" class="btn  btn-danger" style="width: 100px;"
+                          onclick="return confirm('Are you sure you want to delete ?')"><i class="bi bi-trash-fill"></i></button>
+                  </form>
+                    
+                  
+                  </td>
+
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../admin/layout/admin-footer-layout.ejs') -%>

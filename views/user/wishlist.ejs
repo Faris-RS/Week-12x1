@@ -1,0 +1,110 @@
+<%- include('../user/layout/user-header-layout.ejs') -%>
+
+
+
+  <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner"
+    style="background-image:url('https://images.drive.com.au/driveau/image/upload/c_fill,h_1038,w_1844/q_auto:eco/f_auto/v1/cms/uploads/zghdbwldnwrk56reimuj');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="display-t">
+            <div class="display-tc animate-box" data-animate-effect="fadeIn">
+              <h1>Wishlist</h1>
+              <h2>Vehicles That You Wish To Purchase</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<br>
+
+
+  <div class="container"> <br>
+    <div class="card">
+      <div class="card-body">
+        <!-- <h5 class="card-title">Wishlist</h5> -->
+        <% if (list.length==0) { %>
+          <div class="col-12 text-center">
+            <img src="https://ibellstore.com/images/no-item-found-here.png" alt="no items is wishlist"
+              style="width: 400px; height:300px ;">
+          </div>
+          <% } else { %>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Car Name</th>
+                    <th scope="col">FUEL TYPE</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Advance</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">OPTIONS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% list.forEach(function(x) { %>
+                    <tr>
+                      <th scope="row">
+                        <%= index++ %>
+                      </th>
+                      <td>
+                        <%= x.result.type.typeName %>
+                      </td>
+                      <td>
+                        <%= x.result.brand.brand %>
+                      </td>
+                      <td>
+                        <%= x.result.productName %>
+                      </td>
+                      <td>
+                        <%= x.result.fuelType.fuelType %>
+                      </td>
+                      <td>
+                        RS: <%= x.result.price %>
+                      </td>
+                      <td>
+                        RS: <%= x.result.advance %>
+                      </td>
+                      <td><img src='/images/car/<%= x.result.image[0] %>' alt="" style="height: 50px; width: 60px;">
+                      </td>
+                      <td>
+                        <form action="/removeFromWishlist/<%= x.result._id %>" method="post">
+                          <button type="submit" class="btn  btn-danger" style="width: 100px;"><i
+                              class="bi bi-trash-fill"></i></button>
+                        </form>
+
+                      </td>
+
+                    </tr>
+                    <% }) %>
+
+
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <%- include('../user/layout/user-footer-layout.ejs') -%>
